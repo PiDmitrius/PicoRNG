@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [ "$1" = configure ] && command -v systemctl >/dev/null; then
+	systemctl enable picorng.service
+	if [ -d /run/systemd/system ]; then
+		systemctl daemon-reload
+		systemctl restart picorng.service
+	fi
+fi
