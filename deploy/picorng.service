@@ -1,0 +1,20 @@
+[Unit]
+Description=PicoRNG pseudorandom number service
+After=network.target
+
+[Service]
+Environment=PICORNG_ARGS=
+EnvironmentFile=-/etc/default/picorng
+ExecStart=/usr/bin/picorng $PICORNG_ARGS
+DynamicUser=yes
+RuntimeDirectory=picorng
+RuntimeDirectoryMode=0755
+LimitCORE=0
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

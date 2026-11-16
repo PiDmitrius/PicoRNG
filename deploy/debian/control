@@ -1,0 +1,9 @@
+Package: picorng
+Version: @VERSION@
+Architecture: amd64
+Maintainer: PiDmitrius <PiDmitrius@gmail.com>
+Section: utils
+Priority: optional
+Homepage: https://github.com/PiDmitrius/PicoRNG
+Description: Pseudorandom number service
+ Serves pseudorandom bytes and DSRF kits over local sockets and HTTP.
