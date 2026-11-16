@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Tag matches VERSION
+        run: test "${{ github.ref_name }}" = "v$(cat VERSION)"
+
+      - run: build/test.sh
+
+      - run: build/deb.sh
+
+      - run: build/deb-test.sh
+
+      - run: cd dist && sha256sum picorng picorng_*.deb > SHA256SUMS
+
+      - name: Publish
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: dist/*

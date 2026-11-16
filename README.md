@@ -83,3 +83,7 @@ build/test.sh      # gofmt, go vet, go test -race in Docker
 build/deb.sh       # dist/picorng and dist/picorng_<VERSION>_amd64.deb in Docker
 build/deb-test.sh  # install the package under systemd, reseed, fetch, remove
 ```
+
+GitHub Actions runs them on every push and pull request; a tag `vX.Y.Z`
+matching `VERSION` publishes the release with the binary, the package and
+`SHA256SUMS`.
